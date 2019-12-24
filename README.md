@@ -57,6 +57,19 @@ To customize the port, pass the `--port` option as in the following example...
 waitress-serve --port=9000 app:application
 ```
 
+## Running Tests
+
+The tests are run via `pytest`, with the configuration file at `pytest.ini`.
+
+```bash
+# Run all tests
+pytest
+
+# Run only a particular test
+pytest tests/test_api.py::test_hello
+
+```
+
 
 ## Google Cloud Setup Instructions
 
