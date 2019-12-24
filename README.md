@@ -33,11 +33,11 @@ more closely emulates the App Engine production runtime, which uses gunicorn by 
 
 ```bash
 # Linux and MacOS only, use --reload flag to automatically reload on code changes
-gunicorn --reload app:application
+gunicorn app:application --reload
 ```
 
 ```bash
-# Cross-platform -- works on Windows, MacOS and Linux, albeit without a --reload option
+# Cross-platform, works on Windows, MacOS and Linux, albeit without a --reload option available
 waitress-serve app:application
 ```
 
@@ -50,11 +50,12 @@ The sample hello endpoint is at /api/v1/hello/world
 
 The app runs on port 8000 (for gunicorn) and 8080 (for waitress) by default.  
 
-To customize the port, pass the `--port` option as in the following example...
+To customize the port, pass the `--bind` option (for gunicorn) 
+or the `--port` option (for Waitress) as in the following examples...
 
 ```bash
 # Set gunicorn port to 9000
-gunicorn --port=9000 --reload app:application
+gunicorn --bind=:9000 app:application --reload
 
 # Set Waitress port to 9000
 waitress-serve --port=9000 app:application
@@ -78,11 +79,11 @@ pytest tests/test_api.py::test_hello
 
 1. Create an App Engine Project at https://console.cloud.google.com/appengine
 2. Download and install the [Google Cloud SDK](https://cloud.google.com/sdk/docs/)
-3. Run the "Google Cloud SDK Shell" application
-4. Type `gcloud init` in the Cloud SDK Shell
-5. Set the active project (created in step 1) in the Cloud SDK Shell via `gcloud config set project PROJECT_ID`
-5. Install the App Engine components in the Cloud SDK Shell via `gcloud components install app-engine-python`
-6. Log in via `gcloud auth login` in the Cloud SDK Shell
+3. If on Windows, run the "Google Cloud SDK Shell" application
+4. Type `gcloud init` in a terminal or in the Cloud SDK Shell
+5. Log in via `gcloud auth login` in the Cloud SDK Shell if necessary
+6. Set the active project (created in step 1) via `gcloud config set project PROJECT_ID`
+7. If on Windows, install the App Engine components via `gcloud components install app-engine-python`
 
 
 ## Deploying to Google App Engine
