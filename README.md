@@ -28,32 +28,35 @@ pip install -r requirements-dev.txt
 
 ## Running the Development Server
 
-Issue the following command to run the development server...
+If you're on Linux or MacOS you can run the app via `gunicorn`, which offers a `--reload` option and
+more closely emulates the App Engine production runtime, which uses gunicorn by default.
+
+```bash
+# Linux and MacOS only, use --reload flag to automatically reload on code changes
+gunicorn --reload app:application
+```
 
 ```bash
 # Cross-platform -- works on Windows, MacOS and Linux, albeit without a --reload option
 waitress-serve app:application
 ```
 
-If you're on Linux or MacOS you can run the app via gunicorn, which offers a `--reload` option and
-more closely emulates the App Engine production runtime, which uses gunicorn by default.
+The app is viewable at http://localhost:8000 (for gunicorn) or at http://localhost:8080 (for Waitress).
 
-```bash
-# Linux and MacOS only, use --reload flag to automatically reload on code changes
-gunicorn app:application --reload
-```
-
-The app is viewable at http://localhost:8080 -- sample hello endpoint is at http://localhost:8080/api/v1/hello/world
+The sample hello endpoint is at /api/v1/hello/world
 
 
 ### Customizing the HTTP Port
 
-The app runs on port 8080 by default.  
+The app runs on port 8000 (for gunicorn) and 8080 (for waitress) by default.  
 
 To customize the port, pass the `--port` option as in the following example...
 
 ```bash
-# Set port to 9000
+# Set gunicorn port to 9000
+gunicorn --port=9000 --reload app:application
+
+# Set Waitress port to 9000
 waitress-serve --port=9000 app:application
 ```
 
