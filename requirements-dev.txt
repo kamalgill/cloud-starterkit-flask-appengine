@@ -1,0 +1,3 @@
+# Requirements for local development
+-r requirements-common.txt
+waitress==1.4.1

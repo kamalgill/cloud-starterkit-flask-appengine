@@ -1,0 +1,2 @@
+# Production requirements for Google App Engine
+-r requirements-common.txt
