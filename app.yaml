@@ -1,0 +1,9 @@
+# Google App Engine config file
+# -----------------------------
+
+# Recommended to set to Python 3.7 runtime or later
+runtime: python37
+
+# Set gunicorn worker count via --workers arg based on the App Engine instance class
+# See https://cloud.google.com/appengine/docs/standard/python3/runtime#application_startup
+entrypoint: gunicorn --workers 1 --bind :$PORT app:application

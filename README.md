@@ -32,15 +32,16 @@ pip install -r requirements-dev.txt
 Issue the following command to run the development server...
 
 ```bash
-# Cross-platform -- works on Windows, MacOS and Linux
+# Cross-platform -- works on Windows, MacOS and Linux, albeit without a --reload option
 waitress-serve app:application
 ```
 
-If you're on Linux or MacOS you can run the app via gunicorn, which more closely emulates the production setup
+If you're on Linux or MacOS you can run the app via gunicorn, which offers a `--reload` option and
+more closely emulates the App Engine production runtime, which uses gunicorn by default.
 
 ```bash
-# Linux and MacOS only
-gunicorn app:application
+# Linux and MacOS only, use --reload flag to automatically reload on code changes
+gunicorn app:application --reload
 ```
 
 The app is viewable at http://localhost:8080 -- sample hello endpoint is at http://localhost:8080/api/v1/hello/world
