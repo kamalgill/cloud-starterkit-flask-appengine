@@ -1,9 +1,15 @@
 # Google App Engine config file
 # -----------------------------
+# See https://cloud.google.com/appengine/docs/standard/python3/config/appref
 
 # Recommended to set to Python 3.7 runtime or later
 runtime: python37
 
-# Set gunicorn worker count via --workers arg based on the App Engine instance class
+# Set App Engine instance class (defaults to F1)
+# See https://cloud.google.com/appengine/docs/standard/#instance_classes
+instance_class: F1
+
+# Set entrypoint to locate Flask app, which is 'application' in module app/__init__.py
+# Configure gunicorn worker count via --workers arg based on the App Engine instance class
 # See https://cloud.google.com/appengine/docs/standard/python3/runtime#application_startup
 entrypoint: gunicorn --workers 1 --bind :$PORT app:application

@@ -1,4 +1,4 @@
-## Starter Kit for Flask on Google App Engine
+# Starter Kit for Flask on Google App Engine
 
 Starter project template for running a Flask-based application on
 Google App Engine Standard Python 3 Runtime.
@@ -8,10 +8,9 @@ The application structure of this starter kit is loosely inspired by Miguel Grin
 with the book's companion repo at https://github.com/miguelgrinberg/flasky
 
 
-### Development Setup Requirements
+## Development Setup Requirements
 
 - Python 3.7 or later
-- [Google Cloud SDK](https://cloud.google.com/sdk/docs/)
 - Windows, MacOS, and Linux development environments are supported
 
 
@@ -22,7 +21,7 @@ run the following in a terminal (git-bash is recommended on Windows) after cloni
 to set up your local development environment.
 
 ```bash 
-# Install local dev requirements
+# Install local dev requirements, ideally in an isolated Python 3.7 (or later) environment
 pip install -r requirements-dev.txt
 ```
 
@@ -56,4 +55,25 @@ To customize the port, pass the `--port` option as in the following example...
 ```bash
 # Set port to 9000
 waitress-serve --port=9000 app:application
+```
+
+
+## Google Cloud Setup Instructions
+
+1. Create an App Engine Project at https://console.cloud.google.com/appengine
+2. Download and install the [Google Cloud SDK](https://cloud.google.com/sdk/docs/)
+3. Run the "Google Cloud SDK Shell" application
+4. Type `gcloud init` in the Cloud SDK Shell
+5. Set the active project (created in step 1) in the Cloud SDK Shell via `gcloud config set project PROJECT_ID`
+5. Install the App Engine components in the Cloud SDK Shell via `gcloud components install app-engine-python`
+6. Log in via `gcloud auth login` in the Cloud SDK Shell
+
+
+## Deploying to Google App Engine
+
+Run the following command at the repo root (where the `app.yaml` config file is located) to deploy to App Engine...
+
+```bash
+# Deploy to App Engine
+gcloud app deploy
 ```
