@@ -1,0 +1,3 @@
+# Requirements for tests via CI workflow
+-r requirements-common.txt
+pytest

@@ -1,0 +1,18 @@
+# CI workflow via GitHub Actions
+name: "Continous Integration Workflow"
+on:
+  push:
+    branches-ignore:
+      # Skip master branch, as merges to master should be gated by CI checks
+      - master
+jobs:
+  test:
+    name: "Run unit tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - run: "pip install -r requirements-test.txt"
+      - run: "pytest"
