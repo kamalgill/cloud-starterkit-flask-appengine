@@ -1,7 +1,7 @@
 # Starter Kit for Flask on Google App Engine
 
-Starter project template for running a Flask-based application on
-Google App Engine Standard Python 3 Runtime.
+Starter project template for running a Flask-based application as a Web API on
+Google App Engine Standard (Python 3.7 Runtime).
 
 The application structure of this starter kit is loosely inspired by the API chapter of Miguel Grinberg's 
 [Flask Web Development (Second Edition)](http://oreilly.com/catalog/0636920089056) book,
@@ -35,7 +35,7 @@ The starter kit does not yet include the following (PRs are welcome):
 ## Development Setup Requirements
 
 - Python 3.7 or later
-- Windows, MacOS, and Linux development environments are supported
+- Windows, macOS, and Linux development environments are supported
 
 
 ## Development Setup Instructions
@@ -52,23 +52,22 @@ pip install -r requirements-dev.txt
 
 ## Running the Development Server
 
-If you're on Linux or MacOS you can run the app via `gunicorn`, which offers a `--reload` option and
+If you're on Linux or macOS you can run the app via `gunicorn`, which offers a `--reload` option and
 more closely emulates the App Engine production runtime, which uses gunicorn by default.
 
 ```bash
-# Linux and MacOS only, use --reload flag to automatically reload on code changes
+# Linux and macOS only, use --reload flag to automatically reload on code changes
 gunicorn app:application --reload
 ```
 
 ```bash
-# Cross-platform, works on Windows, MacOS and Linux, albeit without a --reload option available
+# Cross-platform, works on Windows, macOS and Linux, albeit without a --reload option available
 waitress-serve app:application
 ```
 
 The app is viewable at http://localhost:8000 (for gunicorn) or at http://localhost:8080 (for Waitress).
 
-The sample hello endpoint is at /api/v1/hello/world
-
+The sample hello endpoint is at `http://$HOST:$PORT/api/v1/hello/world`
 
 ### Customizing the HTTP Port
 
@@ -84,6 +83,7 @@ gunicorn --bind=:9000 app:application --reload
 # Set Waitress port to 9000
 waitress-serve --port=9000 app:application
 ```
+
 
 ## Running Tests
 
@@ -101,18 +101,21 @@ pytest tests/test_api.py::test_hello
 
 ## Google Cloud Setup Instructions
 
+The following steps only need to be performed once per local development environment...
+
 1. Create an App Engine Project at https://console.cloud.google.com/appengine
 2. Download and install the [Google Cloud SDK](https://cloud.google.com/sdk/docs/)
 3. If on Windows, run the "Google Cloud SDK Shell" application
 4. Type `gcloud init` in a terminal or in the Cloud SDK Shell
-5. Log in via `gcloud auth login` in the Cloud SDK Shell if necessary
+5. Log in via `gcloud auth login` in a terminal or in Cloud SDK Shell as needed
 6. Set the active project (created in step 1) via `gcloud config set project PROJECT_ID`
-7. If on Windows, install the App Engine components via `gcloud components install app-engine-python`
+7. If on Windows or macOS, install the App Engine components via `gcloud components install app-engine-python`
 
 
 ## Deploying to Google App Engine
 
-Run the following command at the repo root (where the `app.yaml` config file is located) to deploy to App Engine...
+Ensure the project you want to deploy is selected via `gcloud config set project PROJECT_ID`, then
+run the following command at the repo root (where the `app.yaml` config file is located) to deploy to App Engine...
 
 ```bash
 # Deploy to App Engine
@@ -128,12 +131,12 @@ unit tests when a non-master branch is pushed to GitHub.
 Perform the following steps to configure the CI workflow to be enforced on GitHub pull requests (PRs) against
 the repo's master branch:
 
-1. In the GitHub UI for your forked repo, click the "Settings" tab at top and click the "Branches" nav item at left.
-2. In the "Branch protection rules" section, click the Add rule button if there is no rule for the master branch.
-3. If there is a protection rule for the master branch, click the "Edit" button for that rule.
-4. Enable the checkbox for the "Require status checks to pass before merging".
-5. If "Run unit tests" is a visible option for the "Status checks found in the last week for this repository", use that.
-6. If the "Run unit tests" option isn't displayed yet, it will display after a non-master branch has been pushed.
+1. In the GitHub UI for your forked repo, click the `Settings` tab at top and click the `Branches` nav item at left.
+2. In the `Branch protection rules` section, click the `Add rule` button if there is no rule for the master branch.
+3. If there is a protection rule for the master branch, click the `Edit` button for that rule.
+4. Enable the checkbox for the `Require status checks to pass before merging`.
+5. If `Run unit tests` is a visible option for the `Status checks found in the last week for this repository`, enable that option.
+6. If the `Run unit tests` option isn't displayed yet, it will display after a non-master branch has been pushed.
 7. Create a branch with a test commit to confirm the above has enabled status checks for PRs in your repo.
 
 A Continuous Deployment (CD) pipeline via GitHub Actions will likely land in this starter kit to complement the
