@@ -1,4 +1,5 @@
 # Common requirements used across local dev and production
 Flask==1.1.1
+Flask-Cors==3.0.8
 gevent==1.4.0
 gunicorn==20.0.4
