@@ -1,4 +1,4 @@
 # Requirements for local development
 -r requirements-common.txt
 pytest
-waitress==1.4.2
+waitress==1.4.3
